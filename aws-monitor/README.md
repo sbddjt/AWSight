@@ -1,9 +1,7 @@
 # AWS Monitor
 
 > AWS 콘솔보다 간결하게 — 내 리소스와 비용을 한눈에
-
-![CI](https://github.com/YOUR_USERNAME/aws-monitor/actions/workflows/ci.yml/badge.svg)
-
+> 
 ---
 
 ## 왜 만들었나
