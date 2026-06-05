@@ -1,10 +1,53 @@
-__pycache__/
-*.pyc
+# ───────────────────────────────────────
+# 보안 — 절대 커밋하면 안 되는 파일
+# ───────────────────────────────────────
 .secret.key
-*.db
 backend/.secret.key
-backend/*.db
-
-node_modules/
-dist/
+backend/data/.secret.key
+*.db
+*.sqlite
+*.sqlite3
 .env
+.env.*
+!.env.example
+
+# ───────────────────────────────────────
+# Python
+# ───────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ───────────────────────────────────────
+# Node / Frontend
+# ───────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+
+# ───────────────────────────────────────
+# Docker
+# ───────────────────────────────────────
+docker-compose.override.yml
+
+# ───────────────────────────────────────
+# OS / 에디터
+# ───────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo

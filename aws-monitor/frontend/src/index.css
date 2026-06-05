@@ -4,6 +4,27 @@
 
 @layer base {
   body {
-    @apply bg-gray-950 text-gray-100 antialiased;
+    @apply bg-surface-950 text-gray-100 antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.08) 0%, transparent 60%);
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/[0.03] border border-white/[0.07] backdrop-blur-sm;
+  }
+  .glass-hover {
+    @apply hover:bg-white/[0.05] hover:border-white/[0.12] transition-all duration-200;
   }
 }

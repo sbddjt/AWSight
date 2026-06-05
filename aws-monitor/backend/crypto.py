@@ -1,15 +1,13 @@
 from cryptography.fernet import Fernet
-import os
-
-KEY_FILE = ".secret.key"
+from config import KEY_PATH
 
 
 def _get_or_create_key() -> bytes:
-    if os.path.exists(KEY_FILE):
-        with open(KEY_FILE, "rb") as f:
+    if __import__("os").path.exists(KEY_PATH):
+        with open(KEY_PATH, "rb") as f:
             return f.read()
     key = Fernet.generate_key()
-    with open(KEY_FILE, "wb") as f:
+    with open(KEY_PATH, "wb") as f:
         f.write(key)
     return key
 
