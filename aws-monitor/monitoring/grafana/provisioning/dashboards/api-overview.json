@@ -1,0 +1,79 @@
+{
+  "title": "AWS Monitor — API Overview",
+  "uid": "aws-monitor-api",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "30s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "요청 수 (req/s)",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "expr": "rate(http_requests_total{job=\"aws-monitor-backend\"}[1m])",
+          "legendFormat": "{{method}} {{handler}} {{status_code}}"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "응답 시간 P95 (ms)",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job=\"aws-monitor-backend\"}[5m])) * 1000",
+          "legendFormat": "P95 latency"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "에러율 (%)",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 8, "w": 8, "h": 4 },
+      "targets": [
+        {
+          "expr": "sum(rate(http_requests_total{status_code=~\"5..\"}[5m])) / sum(rate(http_requests_total[5m])) * 100"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": 0 },
+              { "color": "yellow", "value": 1 },
+              { "color": "red", "value": 5 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "업타임",
+      "type": "stat",
+      "gridPos": { "x": 8, "y": 8, "w": 8, "h": 4 },
+      "targets": [
+        {
+          "expr": "time() - process_start_time_seconds{job=\"aws-monitor-backend\"}"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "s" } }
+    },
+    {
+      "id": 5,
+      "title": "총 요청 수",
+      "type": "stat",
+      "gridPos": { "x": 16, "y": 8, "w": 8, "h": 4 },
+      "targets": [
+        {
+          "expr": "sum(http_requests_total{job=\"aws-monitor-backend\"})"
+        }
+      ]
+    }
+  ]
+}
