@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.secret.key
+*.db
+backend/.secret.key
+backend/*.db
+
+node_modules/
+dist/
+.env
